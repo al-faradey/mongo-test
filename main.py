@@ -1,7 +1,3 @@
-# This is a sample Python script.
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 import pandas as pd
 from pydataset import data
 import datetime
@@ -22,8 +18,8 @@ if __name__ == '__main__':
         return pd.to_datetime(np.random.randint(start_u, end_u, n), unit='s')
 
 
-    start = pd.to_datetime('2015-01-01')
-    end = pd.to_datetime('2018-01-01')
+    start = pd.to_datetime('2022-01-01')
+    end = pd.to_datetime('2023-11-01')
     start_date = random_dates(start, end)
     pd_start_date = pd.DataFrame(start_date)
 
