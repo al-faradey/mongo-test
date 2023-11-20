@@ -5,8 +5,15 @@ from datetime import timedelta
 import random
 import numpy as np
 
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
+    import pandas as pd
+    from pydataset import data
+    import datetime
+    from datetime import timedelta
+    import random
+    import numpy as np
+
+    # Press the green button in the gutter to run the script.
     td_series = pd.Series()
     td_series = [random.random() * datetime.timedelta(hours=1) for i in range(10000)]
 
@@ -23,12 +30,7 @@ if __name__ == '__main__':
     start_date = random_dates(start, end)
     pd_start_date = pd.DataFrame(start_date)
 
-    pd_end_date = pd_start_date.copy()
-
-    print(pd_end_date.head(5))
     random.seed(20)
-    for i in range(len(pd_end_date)):
-        pd_end_date.iloc[i] = pd_end_date[i] + timedelta(minutes=random.randint(1, 10))
 
     # generate urls
     dat = data()
@@ -50,6 +52,12 @@ if __name__ == '__main__':
         ips[len(ips)] = str(random.randint(1, 255)) + '.' + str(random.randint(1, 255)) + '.' + str(
             random.randint(1, 255)) + '.' + str(random.randint(1, 255))
 
+    pd_end_date = pd_start_date.copy()
+
     db_ext = pd.concat([urls, ips, pd_start_date, pd_end_date], axis=1)
     db_ext.columns = ['url', 'usr_ip', 'start_datetime', 'end_datetime']
+
+    for i in range(len(db_ext)):
+        db_ext.loc[i, 'end_datetime'] = db_ext.loc[i, 'start_datetime'] + timedelta(minutes=random.randint(1, 30))
+
     db_ext['visit_length'] = pd.to_datetime(db_ext['end_datetime']) - pd.to_datetime(db_ext['start_datetime'])
